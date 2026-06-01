@@ -12,7 +12,9 @@ WEBRTCPERF_DIR    := ../webrtcperf
 
 BBB_URL           := https://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov
 
-.PHONY: help sfu demo scenario plot summarize token filter-logs webrtcperf-stack-up webrtcperf-stack-down fetch-media
+.PHONY: help sfu demo demo-lan scenario scenario-lan plot summarize token filter-logs webrtcperf-stack-up webrtcperf-stack-down fetch-media
+
+LAN_HOST_IP       := 192.168.1.28
 
 ## Show available targets
 help:
@@ -21,15 +23,26 @@ help:
 ## Run livekit SFU (log to logs/sfu-<ts>.log)
 sfu:
 	@mkdir -p $(LOG_DIR)
-	BWE_LOG_INTERVAL=100ms $(SFU_BINARY) --config $(SFU_CONFIG) --dev 2>&1 | tee $(LOG_DIR)/sfu-$(TS).log
+	BWE_LOG_INTERVAL=100ms $(SFU_BINARY) --config $(SFU_CONFIG) --dev --bind 0.0.0.0 2>&1 | tee $(LOG_DIR)/sfu-$(TS).log
 
-## Run the Vite demo client app on port 8080
+## Run the Vite demo client app on port 8080 (localhost only)
 demo:
 	cd $(CLIENT_SDK_JS_DIR) && pnpm examples:demo
+
+## Run the Vite demo client app exposed on the LAN (0.0.0.0:8080)
+demo-lan:
+	cd $(CLIENT_SDK_JS_DIR) && pnpm examples:demo --host 0.0.0.0
 
 ## Run a webrtcperf scenario (make scenario SCENARIO=<name>)
 scenario:
 	cd $(WEBRTCPERF_DIR) && PUBLISHER_SESSIONS=0 yarn start ../webrtc-svc-master-thesis/scenarios/$(SCENARIO).yaml
+
+## Run a webrtcperf scenario against a remote SFU on the LAN (LAN_HOST_IP)
+scenario-lan:
+	cd $(WEBRTCPERF_DIR) && PUBLISHER_SESSIONS=0 \
+	  LIVEKIT_URL=ws://$(LAN_HOST_IP):7880 \
+	  APP_URL=http://$(LAN_HOST_IP):8080 \
+	  yarn start ../webrtc-svc-master-thesis/scenarios/$(SCENARIO).yaml
 
 ## Generate BWE plot for a participant index or range (make plot PARTICIPANT=2 | 0-3)
 plot:
