@@ -1,0 +1,24 @@
+# Logs and results
+logs/
+results/
+*.log
+*.html
+
+# Media files (fetched on demand via `make fetch-media`)
+media/
+
+# Node.js
+node_modules/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp

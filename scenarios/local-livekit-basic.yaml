@@ -1,0 +1,26 @@
+# Two equal sessions with no throttling.
+#
+# Sessions:
+#   - 0: publisher + subscriber, unconstrained
+#   - 1: publisher + subscriber, unconstrained
+
+sessions: 2
+runDuration: 60
+customUrlHandler: '../webrtc-svc-master-thesis/client/livekit-url-handler.mjs'
+scriptPath: '../webrtc-svc-master-thesis/client/local-demo-script.js'
+scriptParams: |
+  {
+    "codec": "vp9",
+    "enableCam": "0-1"
+  }
+debuggingPort: 9000
+showStats: true
+statsInterval: 5
+tabsPerSession: 1
+spawnRate: 1
+display: "true"
+
+throttleConfig: '[{"sessions":"1","down":{"rate":500}}]'
+
+prometheusPushgateway: "http://localhost:9091"
+prometheusPushgatewayJobName: "livekit-basic"

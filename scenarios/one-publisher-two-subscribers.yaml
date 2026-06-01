@@ -1,0 +1,30 @@
+# One publisher and two subscribers, one of them download-throttled.
+#
+# Sessions:
+#   - 0: publisher only, unconstrained
+#   - 1: subscriber only, unconstrained
+#   - 2: subscriber only, download throttled to 600 Kbps
+
+sessions: 3
+runDuration: 60
+customUrlHandler: "../webrtc-svc-master-thesis/client/livekit-url-handler-pub-sub.mjs"
+scriptPath: "../webrtc-svc-master-thesis/client/local-demo-script.js"
+scriptParams: |
+  {
+    "codec": "vp9",
+    "enableCam": "0"
+  }
+debuggingPort: 9000
+showStats: true
+statsInterval: 5
+tabsPerSession: 1
+spawnRate: 1
+detailedStatsPath: "../webrtc-svc-master-thesis/results/results.csv"
+display: "true"
+
+videoPath: "../webrtc-svc-master-thesis/media/big_buck_bunny_1080p_h264.mp4"
+
+throttleConfig: '[{"sessions":"2","down":{"rate":600}}]'
+
+prometheusPushgateway: "http://localhost:9091"
+prometheusPushgatewayJobName: "subscriber-only-throttled"

@@ -1,0 +1,29 @@
+# Two sessions with one upload-throttled.
+#
+# Sessions:
+#   - 0: publisher + subscriber, unconstrained
+#   - 1: publisher + subscriber, upload throttled to 300 Kbps
+
+sessions: 2
+runDuration: 60
+customUrlHandler: "../webrtc-svc-master-thesis/client/livekit-url-handler.mjs"
+scriptPath: "../webrtc-svc-master-thesis/client/local-demo-script.js"
+scriptParams: |
+  {
+    "codec": "vp9",
+    "enableCam": "0-1"
+  }
+debuggingPort: 9000
+showStats: true
+statsInterval: 5
+tabsPerSession: 1
+spawnRate: 1
+detailedStatsPath: "../webrtc-svc-master-thesis/results/results.csv"
+display: "true"
+
+videoPath: "../webrtc-svc-master-thesis/media/testsrc-720p.mp4"
+
+throttleConfig: '[{"sessions":"1","up":{"rate":300}}]'
+
+prometheusPushgateway: "http://localhost:9091"
+prometheusPushgatewayJobName: "multi-client-throttled"

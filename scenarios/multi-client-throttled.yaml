@@ -1,0 +1,30 @@
+# Three sessions with per-session download throttling.
+#
+# Sessions:
+#   - 0: publisher + subscriber, download throttled to 1000 Kbps
+#   - 1: publisher + subscriber, download throttled to 1500 Kbps
+#   - 2: publisher + subscriber, unconstrained
+
+sessions: 3
+runDuration: 180
+customUrlHandler: "../webrtc-svc-master-thesis/client/livekit-url-handler.mjs"
+scriptPath: "../webrtc-svc-master-thesis/client/local-demo-script.js"
+scriptParams: |
+  {
+    "codec": "vp9",
+    "enableCam": "0-4"
+  }
+debuggingPort: 9000
+showStats: true
+statsInterval: 5
+tabsPerSession: 1
+spawnRate: 1
+detailedStatsPath: "../webrtc-svc-master-thesis/results/results.csv"
+display: "true"
+
+videoPath: "../webrtc-svc-master-thesis/media/big_buck_bunny_1080p_h264.mp4"
+
+throttleConfig: '[{"sessions":"0","down":{"rate":1000}},{"sessions":"1","down":{"rate":1500}}]'
+
+prometheusPushgateway: "http://localhost:9091"
+prometheusPushgatewayJobName: "multi-client-throttled"

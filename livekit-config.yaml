@@ -1,0 +1,17 @@
+rtc:
+  congestion_control:
+    enabled: true
+    use_send_side_bwe: true
+    stream_allocator:
+      # Fixed-size probes: overage = 0 means "ignore next-layer delta", floor only.
+      # Effective probe size = max(0, probe_min_bps) = always 200 kbps.
+      probe_overage_pct: 0
+      probe_min_bps: 200000
+      # Capacity-seeking probes (managed mode): target = committed + 200 kbps each
+      # probe, so the estimate climbs above current usage. Cap the target at
+      # usage + 3 Mbps to bound the padding burst on the shared SFU egress.
+      # Throttled subs (1.0/1.5 Mbps) hit real congestion well before this cap;
+      # it only binds for the unthrottled sub on a fat link.
+      probe_max_headroom_bps: 3000000
+room:
+  room_bandwidth_limit: 6000000 # 6 Mbps
