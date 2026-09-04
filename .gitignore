@@ -4,7 +4,7 @@ results/
 *.log
 *.html
 
-# Media files (fetched on demand via `make fetch-media`)
+# Media files
 media/
 
 # Node.js
@@ -22,3 +22,7 @@ __pycache__/
 .vscode/
 .idea/
 *.swp
+
+# Docs
+thesis-text/
+docs/

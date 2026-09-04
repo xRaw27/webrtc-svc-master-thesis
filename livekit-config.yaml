@@ -13,5 +13,21 @@ rtc:
       # Throttled subs (1.0/1.5 Mbps) hit real congestion well before this cap;
       # it only binds for the unthrottled sub on a fat link.
       probe_max_headroom_bps: 3000000
+    send_side_bwe:
+      congestion_detector:
+        probe_regulator:
+          base_interval: 3s
+          min_duration: 200ms
+          max_duration: 200ms
+          duration_increase_factor: 1.0
 room:
-  room_bandwidth_limit: 6000000 # 6 Mbps
+  room_bandwidth_limit: 4000000 # B_SFU = 5 Mbps; 0 disables the room allocator (stock greedy)
+  bandwidth_allocator:
+    # Heuristic allocator parameters (defaults shown explicitly; see
+    # kod/docs/08-heuristic-allocator-plan.md and solver/docs/MODEL.md).
+    epoch: 1s        # decision epoch
+    delta_kbps: 1    # quantization grid of the heuristic
+    alpha: 0.3       # max switching penalty (0 disables stability)
+    t_stab: 10       # stability window, in epochs
+    phi_k: 0.5       # quality function exponent, q = (r/r_max)^phi_k
+    rho: 1.0         # b_hat = rho * BWE; default 0.95, 1.0 = trust the full estimate

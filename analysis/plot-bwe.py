@@ -103,6 +103,8 @@ def main():
                 d["currentSpatial"],
                 d["currentTemporal"],
                 d["bandwidthRequestedBps"] / 1000,
+                d.get("maxAvailableSpatial", -1),
+                d.get("maxAvailableTemporal", -1),
             ))
 
     if not subscriber_data:
@@ -113,7 +115,7 @@ def main():
     t0 = subscriber_data[0][0]
     subscriber_data = [(t - t0, cap, usage) for t, cap, usage in subscriber_data]
     for label in track_data:
-        track_data[label] = [(t - t0, s, tp, bw) for t, s, tp, bw in track_data[label]]
+        track_data[label] = [(t - t0, s, tp, bw, ms, mt) for t, s, tp, bw, ms, mt in track_data[label]]
 
     # Sort stream labels consistently
     stream_labels = sorted(track_data.keys())
@@ -123,13 +125,17 @@ def main():
     ]
     color_map = {label: colors[i % len(colors)] for i, label in enumerate(stream_labels)}
 
-    # Layout: 2 shared rows (BW overview + per-stream bitrate) + 1 row per stream (spatial+temporal)
+    # Layout: 2 shared rows (BW overview + per-stream bitrate) + 2 rows per stream
+    # (consumed Layers, then Max Published — kept separate to avoid clutter).
     n_streams = len(stream_labels)
-    n_rows = 2 + n_streams
+    n_rows = 2 + 2 * n_streams
     subplot_titles = [
         "Estimated BW & Total Usage (Kbps)",
         "Per-Stream Bitrate (Kbps)",
-    ] + [f"Layers: {label}" for label in stream_labels]
+    ]
+    for label in stream_labels:
+        subplot_titles.append(f"Layers consumed: {label}")
+        subplot_titles.append(f"Max layers published by: {label}")
 
     fig = make_subplots(
         rows=n_rows, cols=1,
@@ -169,9 +175,19 @@ def main():
             legendgroup=label,
         ), row=2, col=1)
 
-    # --- Per-stream layer plots (one row each) ---
+    # --- Per-stream layer plots: 2 rows per stream ---
+    #   row A: layers this subscriber is being forwarded (Spatial + Temporal)
+    #   row B: max layers the publisher is actually producing into the SFU
+    #          (from bwe-log fields maxAvailableSpatial/maxAvailableTemporal —
+    #          derived from the publisher's measured per-layer bitrate matrix).
+    # Comparing A vs B tells you whether a track sits below its maxLayer because
+    # the SFU is holding it (A spatial < B spatial) or because the publisher
+    # simply isn't producing the higher layer right now (A spatial == B spatial,
+    # both below the subscriber's maxLayer — this is the case that flips
+    # IsDeficient to false and stalls the deficient-gated probe).
     for i, label in enumerate(stream_labels):
-        row = 3 + i
+        row_consumed = 3 + 2 * i
+        row_published = row_consumed + 1
         data = track_data[label]
         ts = [d[0] for d in data]
 
@@ -182,7 +198,7 @@ def main():
             line=dict(color=color_map[label], width=2, shape="hv"),
             legendgroup=f"layers-{i}",
             showlegend=(i == 0),
-        ), row=row, col=1)
+        ), row=row_consumed, col=1)
 
         fig.add_trace(go.Scatter(
             x=ts,
@@ -191,15 +207,34 @@ def main():
             line=dict(color=color_map[label], width=2, dash="dot", shape="hv"),
             legendgroup=f"layers-{i}",
             showlegend=(i == 0),
-        ), row=row, col=1)
+        ), row=row_consumed, col=1)
 
-        fig.update_yaxes(dtick=1, range=[-0.5, 3.5], row=row, col=1)
+        fig.add_trace(go.Scatter(
+            x=ts,
+            y=[d[4] if d[4] >= 0 else None for d in data],
+            name="Max Published Spatial",
+            line=dict(color=color_map[label], width=2, shape="hv"),
+            legendgroup=f"published-{i}",
+            showlegend=(i == 0),
+        ), row=row_published, col=1)
+
+        fig.add_trace(go.Scatter(
+            x=ts,
+            y=[d[5] if d[5] >= 0 else None for d in data],
+            name="Max Published Temporal",
+            line=dict(color=color_map[label], width=2, dash="dot", shape="hv"),
+            legendgroup=f"published-{i}",
+            showlegend=(i == 0),
+        ), row=row_published, col=1)
+
+        fig.update_yaxes(dtick=1, range=[-0.5, 3.5], row=row_consumed, col=1)
+        fig.update_yaxes(dtick=1, range=[-0.5, 3.5], row=row_published, col=1)
 
     # Layout
     row_height = 180
     fig.update_layout(
         title=f"BWE Analysis — {target_participant}",
-        height=max(800, 350 + n_streams * row_height),
+        height=max(800, 350 + 2 * n_streams * row_height),
         template="plotly_white",
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
     )

@@ -237,6 +237,30 @@ express = ["numpy (>=1.22)"]
 kaleido = ["kaleido (>=1.1.0)"]
 
 [[package]]
+name = "pulp"
+version = "3.3.2"
+description = "PuLP is an LP modeler written in python. PuLP can generate MPS or LP files and call GLPK, COIN CLP/CBC, CPLEX, and GUROBI to solve linear problems."
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "pulp-3.3.2-py3-none-any.whl", hash = "sha256:631b166f72086971a9597f7a0233ababa99bb8d50a01cd543f7758be5a9f86c0"},
+    {file = "pulp-3.3.2.tar.gz", hash = "sha256:d0904700c207ac11e25e3b1213b70eae1d6fb25faa719d75f3f15054901258c0"},
+]
+
+[package.extras]
+cbc = ["cbcbox"]
+copt = ["coptpy"]
+cplex = ["cplex ; sys_platform != \"darwin\" or python_full_version < \"3.12.0\""]
+gurobi = ["gurobipy"]
+highs = ["highspy (==1.13)"]
+mosek = ["mosek"]
+open-py = ["highspy (==1.13)", "pyscipopt"]
+public-py = ["coptpy", "cplex ; sys_platform != \"darwin\" or python_full_version < \"3.12.0\"", "gurobipy", "xpress"]
+scip = ["pyscipopt"]
+xpress = ["xpress"]
+
+[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 description = "Extensions to the standard Python datetime module"
@@ -377,4 +401,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4.0"
-content-hash = "6272fbc0edb992205dcc02af5f8eb5c6d2c725bb2e9cec009f94998404e4ea40"
+content-hash = "cbbb80f127d8fdc703a611ec85a5f2ed153a4cf721a8ae0a694a2ebb44f3bdc7"
