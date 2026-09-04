@@ -1,0 +1,7 @@
+results/
+media/
+.venv/
+__pycache__/
+.pytest_cache/
+.hypothesis/
+.ruff_cache/

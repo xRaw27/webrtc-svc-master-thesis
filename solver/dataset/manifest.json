@@ -1,0 +1,367 @@
+{
+  "generated_at": "2026-08-23T17:13:49+00:00",
+  "rtp_clock_hz": 90000,
+  "values": "raw per-second kbps; smoothing is a consumer-side concern",
+  "ladders": {
+    "L3T3_tf": [
+      "S0T0",
+      "S0T1",
+      "S1T1",
+      "S1T2",
+      "S2T2"
+    ],
+    "L3T3_sf": [
+      "S0T0",
+      "S1T0",
+      "S1T1",
+      "S2T1",
+      "S2T2"
+    ],
+    "L2T2_tf": [
+      "S0T0",
+      "S0T1",
+      "S1T1"
+    ],
+    "L2T2_sf": [
+      "S0T0",
+      "S1T0",
+      "S1T1"
+    ]
+  },
+  "captures": {
+    "bbb_L3T3": {
+      "sourceFile": "bbb_720p24_180s.mp4",
+      "config": "L3T3",
+      "maxKbps": null,
+      "loops": 1,
+      "api": "RTCRtpScriptTransform",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "startedAt": "2026-08-23T15:11:13.174Z",
+      "finishedAt": "2026-08-23T15:14:13.994Z",
+      "mediaDurS": 179.995,
+      "hiddenDuringRun": false,
+      "lastStats": {
+        "t": 1787498053201.454,
+        "bytesSent": 43555586,
+        "framesEncoded": 15510,
+        "targetBitrate": 142000,
+        "scalabilityMode": "L3T3",
+        "qualityLimitationReason": "none",
+        "codec": "video/VP9"
+      },
+      "frames": 15427,
+      "keyframes": {
+        "keyframe_seconds": [
+          0,
+          72,
+          87,
+          147,
+          157
+        ],
+        "spike_ratio_vs_median_second": 0.4454021426287176
+      }
+    },
+    "bbb_L2T2": {
+      "sourceFile": "bbb_720p24_180s.mp4",
+      "config": "L2T2",
+      "maxKbps": null,
+      "loops": 1,
+      "api": "RTCRtpScriptTransform",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "startedAt": "2026-08-23T15:07:35.549Z",
+      "finishedAt": "2026-08-23T15:10:36.491Z",
+      "mediaDurS": 179.999,
+      "hiddenDuringRun": false,
+      "lastStats": {
+        "t": 1787497835697.418,
+        "bytesSent": 43734175,
+        "framesEncoded": 10771,
+        "targetBitrate": 418000,
+        "scalabilityMode": "L2T2",
+        "qualityLimitationReason": "none",
+        "codec": "video/VP9"
+      },
+      "frames": 10716,
+      "keyframes": {
+        "keyframe_seconds": [
+          0,
+          100
+        ],
+        "spike_ratio_vs_median_second": 0.7037151936411581
+      }
+    },
+    "johnny_L3T3": {
+      "sourceFile": "johnny_720p60_x6.mp4",
+      "config": "L3T3",
+      "maxKbps": null,
+      "loops": 1,
+      "api": "RTCRtpScriptTransform",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "startedAt": "2026-08-23T14:46:13.803Z",
+      "finishedAt": "2026-08-23T14:47:14.636Z",
+      "mediaDurS": 60.035,
+      "hiddenDuringRun": false,
+      "lastStats": {
+        "t": 1787496433824.288,
+        "bytesSent": 15560231,
+        "framesEncoded": 5386,
+        "targetBitrate": 134566,
+        "scalabilityMode": "L3T3",
+        "qualityLimitationReason": "none",
+        "codec": "video/VP9"
+      },
+      "frames": 5395,
+      "keyframes": {
+        "keyframe_seconds": [
+          0
+        ],
+        "spike_ratio_vs_median_second": 0.6686183503143917
+      }
+    },
+    "johnny_L2T2": {
+      "sourceFile": "johnny_720p60_x6.mp4",
+      "config": "L2T2",
+      "maxKbps": null,
+      "loops": 1,
+      "api": "RTCRtpScriptTransform",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "startedAt": "2026-08-23T14:44:31.242Z",
+      "finishedAt": "2026-08-23T14:45:32.202Z",
+      "mediaDurS": 60.062,
+      "hiddenDuringRun": false,
+      "lastStats": {
+        "t": 1787496331379.357,
+        "bytesSent": 14539203,
+        "framesEncoded": 3594,
+        "targetBitrate": 418000,
+        "scalabilityMode": "L2T2",
+        "qualityLimitationReason": "none",
+        "codec": "video/VP9"
+      },
+      "frames": 3598,
+      "keyframes": {
+        "keyframe_seconds": [
+          0
+        ],
+        "spike_ratio_vs_median_second": 0.7046932484218851
+      }
+    }
+  },
+  "sources": {
+    "bbb": {
+      "mezzanine": "bbb_720p24_180s.mp4",
+      "note": "first 180 s of the 596 s mezzanine (lossless stream-copy cut); the calm intro segment \u2014 the heavy scenes at ~7:25+ and ~9:05+ of the full movie are outside this cut",
+      "mezzanine_sha256": "d8910cfdb3f1c8ca363ab24434f2acffcb49ed2b0a441666a275876a9bf6d8b2",
+      "probe": {
+        "width": 1280,
+        "height": 720,
+        "fps": "24/1",
+        "duration_s": 180.083333
+      }
+    },
+    "johnny": {
+      "mezzanine": "johnny_720p60_x6.mp4",
+      "note": "pre-looped 6x (lossless concat of the 10 s original); content seam every ~10 s",
+      "mezzanine_sha256": "63c7b6cc88869a4c02422524f17ef7ed4f091968a5ff005f1fdedf708375684b",
+      "probe": {
+        "width": 1280,
+        "height": 720,
+        "fps": "60/1",
+        "duration_s": 60.1
+      }
+    },
+    "originals_sha256": {
+      "media/Johnny_1280x720_60.y4m": "412eef72f06e22bad30cccc527eddc3ae1cb98f3c145472f13f30844520b2517",
+      "media/big_buck_bunny_1080p_h264.mp4": "3599fad56808a9a64057461d201730bfef8d668ea37e1c4e3021dec06d92d8b0"
+    },
+    "johnny_url": "https://media.xiph.org/video/derf/y4m/Johnny_1280x720_60.y4m"
+  },
+  "summary": {
+    "bbb_L3T3_tf": {
+      "l1": {
+        "mean": 70.2,
+        "median": 70.8,
+        "p95": 94.5
+      },
+      "l2": {
+        "mean": 93.7,
+        "median": 95.1,
+        "p95": 138.2
+      },
+      "l3": {
+        "mean": 364.6,
+        "median": 374.1,
+        "p95": 580.6
+      },
+      "l4": {
+        "mean": 523.6,
+        "median": 537.4,
+        "p95": 790.0
+      },
+      "l5": {
+        "mean": 1920.1,
+        "median": 2001.3,
+        "p95": 2655.3
+      }
+    },
+    "bbb_L3T3_sf": {
+      "l1": {
+        "mean": 70.2,
+        "median": 70.8,
+        "p95": 94.5
+      },
+      "l2": {
+        "mean": 273.2,
+        "median": 281.5,
+        "p95": 374.0
+      },
+      "l3": {
+        "mean": 364.6,
+        "median": 374.1,
+        "p95": 580.6
+      },
+      "l4": {
+        "mean": 1332.2,
+        "median": 1398.3,
+        "p95": 1876.7
+      },
+      "l5": {
+        "mean": 1920.1,
+        "median": 2001.3,
+        "p95": 2655.3
+      }
+    },
+    "bbb_L2T2_tf": {
+      "l1": {
+        "mean": 269.3,
+        "median": 265.9,
+        "p95": 330.5
+      },
+      "l2": {
+        "mean": 421.5,
+        "median": 413.5,
+        "p95": 530.9
+      },
+      "l3": {
+        "mean": 1931.5,
+        "median": 1908.3,
+        "p95": 2254.8
+      }
+    },
+    "bbb_L2T2_sf": {
+      "l1": {
+        "mean": 269.3,
+        "median": 265.9,
+        "p95": 330.5
+      },
+      "l2": {
+        "mean": 1240.8,
+        "median": 1235.8,
+        "p95": 1386.9
+      },
+      "l3": {
+        "mean": 1931.5,
+        "median": 1908.3,
+        "p95": 2254.8
+      }
+    },
+    "johnny_L3T3_tf": {
+      "l1": {
+        "mean": 75.1,
+        "median": 75.9,
+        "p95": 90.0
+      },
+      "l2": {
+        "mean": 97.8,
+        "median": 97.5,
+        "p95": 118.5
+      },
+      "l3": {
+        "mean": 388.2,
+        "median": 392.4,
+        "p95": 442.8
+      },
+      "l4": {
+        "mean": 554.0,
+        "median": 558.6,
+        "p95": 615.6
+      },
+      "l5": {
+        "mean": 2062.6,
+        "median": 2079.6,
+        "p95": 2232.9
+      }
+    },
+    "johnny_L3T3_sf": {
+      "l1": {
+        "mean": 75.1,
+        "median": 75.9,
+        "p95": 90.0
+      },
+      "l2": {
+        "mean": 298.5,
+        "median": 306.0,
+        "p95": 339.6
+      },
+      "l3": {
+        "mean": 388.2,
+        "median": 392.4,
+        "p95": 442.8
+      },
+      "l4": {
+        "mean": 1448.3,
+        "median": 1476.3,
+        "p95": 1583.7
+      },
+      "l5": {
+        "mean": 2062.6,
+        "median": 2079.6,
+        "p95": 2232.9
+      }
+    },
+    "johnny_L2T2_tf": {
+      "l1": {
+        "mean": 266.8,
+        "median": 267.1,
+        "p95": 283.9
+      },
+      "l2": {
+        "mean": 414.2,
+        "median": 413.2,
+        "p95": 438.1
+      },
+      "l3": {
+        "mean": 1927.8,
+        "median": 1932.1,
+        "p95": 1985.2
+      }
+    },
+    "johnny_L2T2_sf": {
+      "l1": {
+        "mean": 266.8,
+        "median": 267.1,
+        "p95": 283.9
+      },
+      "l2": {
+        "mean": 1243.9,
+        "median": 1248.4,
+        "p95": 1279.5
+      },
+      "l3": {
+        "mean": 1927.8,
+        "median": 1932.1,
+        "p95": 1985.2
+      }
+    }
+  },
+  "monotonicity_violations": {
+    "bbb_L3T3_tf": 0,
+    "bbb_L3T3_sf": 0,
+    "bbb_L2T2_tf": 0,
+    "bbb_L2T2_sf": 0,
+    "johnny_L3T3_tf": 0,
+    "johnny_L3T3_sf": 0,
+    "johnny_L2T2_tf": 0,
+    "johnny_L2T2_sf": 0
+  }
+}
